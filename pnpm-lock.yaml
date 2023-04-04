@@ -9,6 +9,7 @@ specifiers:
   '@types/node': ^16.18.23
   '@types/react': ^18.0.32
   '@types/react-dom': ^18.0.11
+  '@use-gesture/react': ^10.2.25
   prettier: 2.8.7
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -26,6 +27,7 @@ dependencies:
   '@types/node': 16.18.23
   '@types/react': 18.0.32
   '@types/react-dom': 18.0.11
+  '@use-gesture/react': 10.2.25_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.10.0_biqbaboplfbrettd7655fr4n2y
@@ -2729,6 +2731,19 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.57.0
       eslint-visitor-keys: 3.4.0
+    dev: false
+
+  /@use-gesture/core/10.2.25:
+    resolution: {integrity: sha512-tn01i1//mZrv+9VwyGB4KiuA6fQWvPfzwJNwcjxtMBeW0ELBukXOimvdm3hztxkpVwlz8dhQnXzkjtsxSpe9VA==}
+    dev: false
+
+  /@use-gesture/react/10.2.25_react@18.2.0:
+    resolution: {integrity: sha512-DCxBNxILAFPp74O5f0zhXshmf5Vur4sKJmNX+gbNvg2mdJgch6iWRmahsDE1BqeaTgwZL/gwKIbl5VsP6PTgVg==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@use-gesture/core': 10.2.25
+      react: 18.2.0
     dev: false
 
   /@webassemblyjs/ast/1.11.1:
