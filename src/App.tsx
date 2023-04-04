@@ -2,6 +2,7 @@ import { animated, config, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import "./App.css";
 import { useWindowWidth } from "./hooks/useWindowWidth";
+import { range } from "./utils";
 
 function App() {
   const width = useWindowWidth();
@@ -29,7 +30,7 @@ function App() {
   const bind = useDrag(
     ({ last, velocity: [vx], direction: [dx], movement: [mx], canceled }) => {
       // when the user releases the sheet, we check whether it passed
-      // the threshold for it to close, or if we reset it to its open positino
+      // the threshold for it to close, or if we reset it to its open position
       if (last) {
         mx > width * 0.5 || (vx > 0.5 && dx > 0)
           ? close(vx)
@@ -51,12 +52,16 @@ function App() {
 
   return (
     <div>
-      <div
-        style={{ background: "lightpink" }}
+      <animated.div
+        style={{
+          transform: x.to((px) => `translateX(${(px - width) / 2}px)`),
+          background: "lightpink",
+          filter: x.to((px) => `brightness(${range(0, width, 0.7, 1, px)})`),
+        }}
         onClick={() => open({ canceled: false })}
       >
         A
-      </div>
+      </animated.div>
       <animated.div
         {...bind()}
         style={{
