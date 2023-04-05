@@ -90,7 +90,6 @@ const Container = styled.div`
 `
 
 const Page = styled(animated.div)`
-  position: absolute;
   width: 100%;
   height: 100%;
   padding: 4.25rem 1.5rem;

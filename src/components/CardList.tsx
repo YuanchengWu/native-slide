@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-type CardContent = { id: string; content: JSX.Element }
+export type CardContent = { id: string; content: JSX.Element }
 type CardVariant = "start" | "middle" | "end" | "single"
 
 interface CardListProps {
@@ -50,6 +50,13 @@ const Card = styled.div<{ variant: CardVariant }>`
     variant === "start" &&
     css`
       border-radius: 0.75rem 0.75rem 0 0;
+      border-bottom: 1px solid #e9e9e9;
+    `}
+
+  ${({ variant }) =>
+    variant === "middle" &&
+    css`
+      border-bottom: 1px solid #e9e9e9;
     `}
 
   ${({ variant }) =>

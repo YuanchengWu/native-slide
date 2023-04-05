@@ -22,7 +22,6 @@ export function PageSection({
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 0.188rem;
   width: 100%;
 `
 
@@ -32,4 +31,5 @@ const Title = styled.h2`
   font-weight: 600;
   line-height: 140%;
   color: #909090; // Color contrast failure
+  margin-bottom: 0.188rem;
 `
