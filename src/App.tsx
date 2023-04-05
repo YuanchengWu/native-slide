@@ -6,6 +6,7 @@ import { useWindowWidth } from "./hooks/useWindowWidth"
 import { range } from "./utils"
 import { Lesson } from "./routes/Lesson"
 import { History } from "./routes/History"
+import { Nav } from "./components/Nav"
 
 function App() {
   const width = useWindowWidth()
@@ -54,7 +55,10 @@ function App() {
   const display = x.to((px) => (px < width ? "block" : "none"))
 
   return (
-    <div>
+    <Container>
+      <Header>
+        <Nav icon="history" handleClick={() => {}} title="I'm a title!" />
+      </Header>
       <Page
         style={{
           transform: x.to((px) => `translateX(${(px - width) / 4}px)`),
@@ -75,17 +79,21 @@ function App() {
       >
         <History />
       </Page>
-    </div>
+    </Container>
   )
 }
 
 export default App
 
-const Page = styled(animated.section)`
+const Container = styled.div`
+  overflow-y: auto;
+`
+
+const Page = styled(animated.div)`
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 1.5rem;
+  padding: 4.25rem 1.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -93,4 +101,12 @@ const Page = styled(animated.section)`
   background: #f3f3f3;
   will-change: transform, opacity;
   touch-action: pan-y;
+  gap: 1.5rem;
+`
+
+const Header = styled(animated.header)`
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
 `

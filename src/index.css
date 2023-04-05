@@ -21,8 +21,8 @@ code {
   height: 100%;
 }
 
-#root > div {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+p,
+h1,
+h2 {
+  margin: 0;
 }

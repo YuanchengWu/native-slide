@@ -9,9 +9,16 @@ interface NavProps {
   icon: Icon
   handleClick: () => void
   title?: string
+  blur?: boolean
 }
 
-export function Nav({ icon, handleClick, title }: NavProps): JSX.Element {
+export function Nav({
+  icon,
+  handleClick,
+  title,
+  blur = false,
+}: NavProps): JSX.Element {
+  // TODO: abstract state using location
   return (
     <NavBar>
       <span>
@@ -37,14 +44,19 @@ const NavBar = styled.nav`
   display: grid;
   grid-template-columns: 1.5rem 1fr 1.5rem;
   grid-template-rows: 1.5rem;
+  align-items: center;
+  align-content: center;
+  padding: 1.5rem;
+  backdrop-filter: saturate(180%) blur(20px);
   width: 100%;
+  height: 2.75rem;
+  box-sizing: border-box;
 `
 
 const Title = styled.h1`
   font-size: 1.125rem;
   font-weight: 600;
   text-align: center;
-  margin: 0;
 `
 
 const IconButton = styled.button`
