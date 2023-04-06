@@ -68,6 +68,7 @@ function App() {
         <Nav
           icon="history"
           handleClick={() => {}}
+          width={width}
           title="I'm a title!"
           blur={blur}
         />
@@ -78,10 +79,11 @@ function App() {
           filter: x.to((px) => `brightness(${range(0, width, 0.7, 1, px)})`),
         }}
         onClick={() => open({ canceled: false })}
-        onScroll={handleScroll}
       >
-        <Lesson />
-        <ButtonBar />
+        <ScrollLayer onScroll={handleScroll}>
+          <Lesson />
+          <ButtonBar />
+        </ScrollLayer>
       </Page>
       <Page
         {...bind()}
@@ -92,7 +94,9 @@ function App() {
         }}
         onClick={() => close(0)}
       >
-        <History />
+        <ScrollLayer onScroll={handleScroll}>
+          <History />
+        </ScrollLayer>
       </Page>
     </Container>
   )
@@ -100,22 +104,29 @@ function App() {
 
 export default App
 
-const Container = styled.div``
+const Container = styled.div`
+  overflow: hidden;
+`
 
 const Page = styled(animated.div)`
   position: absolute;
-  overflow-y: auto;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  padding: 4.25rem 1.5rem;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: #f3f3f3;
   will-change: transform, opacity;
-  touch-action: pan-y;
+  touch-action: none;
+`
+
+const ScrollLayer = styled.div`
+  overflow-y: auto;
+  padding: 4.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
+  height: calc(100% - 228px);
 `
 
 const Header = styled(animated.header)`

@@ -8,6 +8,7 @@ type Icon = "history" | "chevron"
 interface NavProps {
   icon: Icon
   handleClick: () => void
+  width: number
   title?: string
   blur?: boolean
 }
@@ -15,12 +16,13 @@ interface NavProps {
 export function Nav({
   icon,
   handleClick,
+  width,
   title,
   blur = false,
 }: NavProps): JSX.Element {
   // TODO: abstract state using location
   return (
-    <NavBar blur={blur}>
+    <NavBar blur={blur} width={width}>
       <span>
         {icon === "chevron" && (
           <IconButton type="button" onClick={handleClick}>
@@ -40,14 +42,14 @@ export function Nav({
   )
 }
 
-const NavBar = styled.nav<{ blur: boolean }>`
+const NavBar = styled.nav<{ blur: boolean; width: number }>`
   display: grid;
   grid-template-columns: 1.5rem 1fr 1.5rem;
   grid-template-rows: 1.5rem;
   align-items: center;
   align-content: center;
   padding: 1.5rem;
-  width: 100%;
+  width: ${({ width }) => width}px;
   height: 2.75rem;
   box-sizing: border-box;
 

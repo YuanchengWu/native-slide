@@ -36,7 +36,7 @@ export function HistoryItem({
   )
 }
 
-const Container = styled.li`
+const Container = styled.div`
   display: grid;
   grid-template-columns: 4rem 1fr min-content;
   grid-template-rows: 4rem;

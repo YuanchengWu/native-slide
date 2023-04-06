@@ -14,7 +14,7 @@ export function ProgressRing({ progress }: ProgressRingProps): JSX.Element {
       <circle
         stroke="#E9E9E9"
         fill="transparent"
-        stroke-width={stroke}
+        strokeWidth={stroke}
         r={normalizedRadius}
         cx={radius}
         cy={radius}
@@ -25,7 +25,6 @@ export function ProgressRing({ progress }: ProgressRingProps): JSX.Element {
         strokeWidth={stroke}
         strokeDasharray={circumference + " " + circumference}
         style={{ strokeDashoffset, rotate: "90deg", transformOrigin: "center" }}
-        stroke-width={stroke}
         r={normalizedRadius}
         cx={radius}
         cy={radius}

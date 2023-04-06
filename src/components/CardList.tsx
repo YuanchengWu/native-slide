@@ -17,7 +17,7 @@ export function CardList({ cards }: CardListProps): JSX.Element {
   }
 
   return (
-    <ul>
+    <ListContainer>
       {cards.map((card, i) => {
         const key = `${card.id}-${i}`
 
@@ -42,9 +42,15 @@ export function CardList({ cards }: CardListProps): JSX.Element {
             )
         }
       })}
-    </ul>
+    </ListContainer>
   )
 }
+
+const ListContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
 
 const Card = styled.li<{ variant: CardVariant }>`
   background-color: #ffffff;
