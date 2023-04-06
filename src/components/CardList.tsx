@@ -55,6 +55,11 @@ const ListContainer = styled.ul`
 const Card = styled.li<{ variant: CardVariant }>`
   background-color: #ffffff;
   padding: 1rem;
+  transition: filter 200ms ease;
+
+  :active {
+    filter: brightness(85%);
+  }
 
   ${({ variant }) =>
     variant === "start" &&

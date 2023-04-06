@@ -1,43 +1,58 @@
 import styled, { css } from "styled-components"
+import { SpringValue, animated } from "@react-spring/web"
 
 import history from "../svgs/history.svg"
 import chevron from "../svgs/left-chevron.svg"
-
-type Icon = "history" | "chevron"
+import { invlerp } from "../utils"
 
 interface NavProps {
-  icon: Icon
-  handleClick: () => void
+  onOpen: () => void
+  onClose: () => void
   width: number
+  x: SpringValue<number>
   title?: string
   blur?: boolean
 }
 
 export function Nav({
-  icon,
-  handleClick,
+  onOpen,
+  onClose,
   width,
+  x,
   title,
   blur = false,
 }: NavProps): JSX.Element {
   // TODO: abstract state using location
   return (
     <NavBar blur={blur} width={width}>
-      <span>
-        {icon === "chevron" && (
-          <IconButton type="button" onClick={handleClick}>
-            <img src={chevron} alt="chevron" />
-          </IconButton>
-        )}
-      </span>
-      <span>{title && <Title>{title}</Title>}</span>
-      <span>
-        {icon === "history" && (
-          <IconButton type="button" onClick={handleClick}>
-            <img src={history} alt="history" />
-          </IconButton>
-        )}
-      </span>
+      <animated.span
+        style={{
+          opacity: x.to((px) => invlerp(width, 0, px)),
+          transform: x.to((px) => `translateX(${px / 64}px)`),
+        }}
+      >
+        <IconButton type="button" onClick={onClose}>
+          <img src={chevron} alt="chevron" />
+        </IconButton>
+      </animated.span>
+      <animated.span
+        style={{
+          opacity: x.to((px) => invlerp(width, 0, px)),
+          transform: x.to((px) => `translateX(${px / 4}px)`),
+          pointerEvents: "none",
+        }}
+      >
+        {title && <Title>{title}</Title>}
+      </animated.span>
+      <animated.span
+        style={{
+          opacity: x.to((px) => invlerp(0, width, px)),
+        }}
+      >
+        <IconButton type="button" onClick={onOpen}>
+          <img src={history} alt="history" />
+        </IconButton>
+      </animated.span>
     </NavBar>
   )
 }
@@ -76,4 +91,12 @@ const IconButton = styled.button`
   align-items: center;
   width: 100%;
   height: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 200ms ease;
+
+  :active {
+    opacity: 0.5;
+    background-color: transparent;
+  }
 `

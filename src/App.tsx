@@ -33,6 +33,9 @@ function App() {
     })
   }
 
+  const handleOpen = () => open({ canceled: false })
+  const handleClose = () => close(0)
+
   const bind = useDrag(
     ({ last, velocity: [vx], direction: [dx], movement: [mx], canceled }) => {
       // when the user releases the sheet, we check whether it passed
@@ -66,11 +69,12 @@ function App() {
     <Container>
       <Header>
         <Nav
-          icon="history"
-          handleClick={() => {}}
+          onOpen={handleOpen}
+          onClose={handleClose}
           width={width}
-          title="I'm a title!"
+          x={x}
           blur={blur}
+          title="Lesson History"
         />
       </Header>
       <Page
@@ -78,7 +82,6 @@ function App() {
           transform: x.to((px) => `translateX(${(px - width) / 4}px)`),
           filter: x.to((px) => `brightness(${range(0, width, 0.7, 1, px)})`),
         }}
-        onClick={() => open({ canceled: false })}
       >
         <ScrollLayer onScroll={handleScroll}>
           <Lesson />
@@ -92,7 +95,6 @@ function App() {
           right: `calc(-100vw + ${width}px)`,
           x,
         }}
-        onClick={() => close(0)}
       >
         <ScrollLayer onScroll={handleScroll}>
           <History />
