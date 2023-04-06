@@ -9,11 +9,15 @@ interface CardListProps {
 
 export function CardList({ cards }: CardListProps): JSX.Element {
   if (!Array.isArray(cards)) {
-    return <Card variant="single">{cards.content}</Card>
+    return (
+      <Card as="div" variant="single">
+        {cards.content}
+      </Card>
+    )
   }
 
   return (
-    <>
+    <ul>
       {cards.map((card, i) => {
         const key = `${card.id}-${i}`
 
@@ -38,11 +42,11 @@ export function CardList({ cards }: CardListProps): JSX.Element {
             )
         }
       })}
-    </>
+    </ul>
   )
 }
 
-const Card = styled.div<{ variant: CardVariant }>`
+const Card = styled.li<{ variant: CardVariant }>`
   background-color: #ffffff;
   padding: 1rem;
 

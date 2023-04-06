@@ -11,6 +11,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - drag and `touch-action` CSS property
 - velocity activated
 - accessibility
+  - HTML semantics
+  - text color contrast
+- scroll activated blur on navbar
 
 ## Available Scripts
 
