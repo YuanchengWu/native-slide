@@ -1,3 +1,4 @@
+import { UIEventHandler, useState } from "react"
 import { animated, config, useSpring } from "@react-spring/web"
 import { useDrag } from "@use-gesture/react"
 import styled from "styled-components"
@@ -54,10 +55,21 @@ function App() {
 
   const display = x.to((px) => (px < width ? "block" : "none"))
 
+  const [blur, setBlur] = useState(false)
+  const handleScroll: UIEventHandler<HTMLDivElement> = (event) => {
+    if (event.currentTarget.scrollTop === 0) setBlur(false)
+    else setBlur(true)
+  }
+
   return (
     <Container>
       <Header>
-        <Nav icon="history" handleClick={() => {}} title="I'm a title!" />
+        <Nav
+          icon="history"
+          handleClick={() => {}}
+          title="I'm a title!"
+          blur={blur}
+        />
       </Header>
       <Page
         style={{
@@ -65,6 +77,7 @@ function App() {
           filter: x.to((px) => `brightness(${range(0, width, 0.7, 1, px)})`),
         }}
         onClick={() => open({ canceled: false })}
+        onScroll={handleScroll}
       >
         <Lesson />
       </Page>
@@ -85,11 +98,11 @@ function App() {
 
 export default App
 
-const Container = styled.div`
-  overflow-y: auto;
-`
+const Container = styled.div``
 
 const Page = styled(animated.div)`
+  position: absolute;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
   padding: 4.25rem 1.5rem;

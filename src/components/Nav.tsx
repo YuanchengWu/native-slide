@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import history from "../svgs/history.svg"
 import chevron from "../svgs/left-chevron.svg"
@@ -20,7 +20,7 @@ export function Nav({
 }: NavProps): JSX.Element {
   // TODO: abstract state using location
   return (
-    <NavBar>
+    <NavBar blur={blur}>
       <span>
         {icon === "chevron" && (
           <IconButton type="button" onClick={handleClick}>
@@ -40,17 +40,23 @@ export function Nav({
   )
 }
 
-const NavBar = styled.nav`
+const NavBar = styled.nav<{ blur: boolean }>`
   display: grid;
   grid-template-columns: 1.5rem 1fr 1.5rem;
   grid-template-rows: 1.5rem;
   align-items: center;
   align-content: center;
   padding: 1.5rem;
-  backdrop-filter: saturate(180%) blur(20px);
   width: 100%;
   height: 2.75rem;
   box-sizing: border-box;
+
+  ${({ blur }) =>
+    blur &&
+    css`
+      backdrop-filter: saturate(180%) blur(20px) brightness(120%);
+      border-bottom: 1px solid #ebe8ec;
+    `}
 `
 
 const Title = styled.h1`
