@@ -8,6 +8,7 @@ import { range } from "./utils"
 import { Lesson } from "./routes/Lesson"
 import { History } from "./routes/History"
 import { Nav } from "./components/Nav"
+import { ButtonBar } from "./components/ButtonBar"
 
 function App() {
   const width = useWindowWidth()
@@ -80,6 +81,7 @@ function App() {
         onScroll={handleScroll}
       >
         <Lesson />
+        <ButtonBar />
       </Page>
       <Page
         {...bind()}
