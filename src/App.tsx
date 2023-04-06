@@ -1,4 +1,5 @@
-import { UIEventHandler, useState } from "react"
+import { UIEventHandler, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { animated, config, useSpring } from "@react-spring/web"
 import { useDrag } from "@use-gesture/react"
 import styled from "styled-components"
@@ -8,11 +9,16 @@ import { range } from "./utils"
 import { Lesson } from "./routes/Lesson"
 import { History } from "./routes/History"
 import { Nav } from "./components/Nav"
-import { ButtonBar } from "./components/ButtonBar"
 
 function App() {
-  const width = useWindowWidth()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    navigate("/lesson/friday-night")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const width = useWindowWidth()
   const [{ x }, api] = useSpring(() => ({ x: width }), [width])
 
   const open = ({ canceled }: { canceled: boolean }) => {
@@ -23,6 +29,7 @@ function App() {
       immediate: false,
       config: canceled ? config.wobbly : config.stiff,
     })
+    !canceled && navigate("/lesson/friday-night/history")
   }
 
   const close = (velocity = 0) => {
@@ -31,6 +38,7 @@ function App() {
       immediate: false,
       config: { ...config.stiff, velocity },
     })
+    navigate(-1)
   }
 
   const handleOpen = () => open({ canceled: false })
@@ -85,7 +93,6 @@ function App() {
       >
         <ScrollLayer onScroll={handleScroll}>
           <Lesson />
-          <ButtonBar />
         </ScrollLayer>
       </Page>
       <Page

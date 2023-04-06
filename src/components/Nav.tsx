@@ -22,7 +22,6 @@ export function Nav({
   title,
   blur = false,
 }: NavProps): JSX.Element {
-  // TODO: abstract state using location
   return (
     <NavBar blur={blur} width={width}>
       <animated.span

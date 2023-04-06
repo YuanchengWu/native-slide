@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { PageSection } from "../components/PageSection"
 import { CardContent, CardList } from "../components/CardList"
 import { Goal } from "../components/Goal"
+import { ButtonBar } from "../components/ButtonBar"
 
 const goal: CardContent = {
   id: "goal-card",
@@ -62,6 +63,7 @@ export function Lesson(): JSX.Element {
       <PageSection title="Also Try">
         <CardList cards={alsoTry} />
       </PageSection>
+      <ButtonBar />
     </>
   )
 }
