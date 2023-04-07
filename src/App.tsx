@@ -103,10 +103,21 @@ function App() {
           x,
         }}
       >
-        <ScrollLayer onScroll={handleScroll}>
+        <ScrollLayer
+          onScroll={handleScroll}
+          {...(navigator.userAgent.match(/chrome|chromium|crios/i) && {
+            style: { pointerEvents: "none" },
+          })}
+        >
           <History />
         </ScrollLayer>
-        <EE>Hire me! 🤝</EE>
+        <EE
+          style={{
+            transform: x.to((px) => `scale(${range(0, -width, 1, 2, px)})`),
+          }}
+        >
+          Hire me! 🤝
+        </EE>
       </Page>
     </Container>
   )
@@ -129,7 +140,7 @@ const Page = styled(animated.div)`
 `
 
 const ScrollLayer = styled.div`
-  overflow-y: auto;
+  overflow: auto;
   padding: 4.25rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -145,10 +156,16 @@ const Header = styled(animated.header)`
   width: 100%;
 `
 
-const EE = styled.div`
+const EE = styled(animated.div)`
   position: absolute;
-  left: 110vw;
-  top: 50vh;
+  left: 99vw;
+  top: 0;
   font-size: 1rem;
+  height: 100vh;
   width: 100%;
+  background-color: #f3f3f3;
+  transform-origin: left;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
 `
