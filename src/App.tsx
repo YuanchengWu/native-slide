@@ -106,6 +106,7 @@ function App() {
         <ScrollLayer onScroll={handleScroll}>
           <History />
         </ScrollLayer>
+        <EE>Hire me! 🤝</EE>
       </Page>
     </Container>
   )
@@ -119,7 +120,6 @@ const Container = styled.div`
 
 const Page = styled(animated.div)`
   position: absolute;
-  overflow: hidden;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -142,5 +142,13 @@ const Header = styled(animated.header)`
   position: fixed;
   top: 0;
   z-index: 1;
+  width: 100%;
+`
+
+const EE = styled.div`
+  position: absolute;
+  left: 110vw;
+  top: 50vh;
+  font-size: 1rem;
   width: 100%;
 `
