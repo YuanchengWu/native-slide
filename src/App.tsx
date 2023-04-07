@@ -21,15 +21,13 @@ function App() {
   const width = useWindowWidth()
   const [{ x }, api] = useSpring(() => ({ x: width }), [width])
 
-  const open = ({ canceled }: { canceled: boolean }) => {
-    // when cancel is true, it means that the user passed the upwards threshold
-    // so we change the spring config to create a nice wobbly effect
+  const open = () => {
     api.start({
       x: 0,
       immediate: false,
-      config: canceled ? config.wobbly : config.stiff,
+      config: config.stiff,
     })
-    !canceled && navigate("/lesson/friday-night/history")
+    navigate("/lesson/friday-night/history")
   }
 
   const close = (velocity = 0) => {
@@ -41,19 +39,14 @@ function App() {
     navigate(-1)
   }
 
-  const handleOpen = () => open({ canceled: false })
-  const handleClose = () => close(0)
-
   const bind = useDrag(
-    ({ last, velocity: [vx], direction: [dx], movement: [mx], canceled }) => {
-      // when the user releases the sheet, we check whether it passed
+    ({ last, velocity: [vx], direction: [dx], movement: [mx] }) => {
+      // when the user releases the history page, we check whether it passed
       // the threshold for it to close, or if we reset it to its open position
       if (last) {
-        mx > width * 0.5 || (vx > 0.5 && dx > 0)
-          ? close(vx)
-          : open({ canceled })
+        mx > width * 0.5 || (vx > 0.5 && dx > 0) ? close(vx) : open()
       }
-      // when the user keeps dragging, we just move the sheet according to
+      // when the user keeps dragging, we just move the history page according to
       // the cursor position
       else api.start({ x: mx, immediate: true })
     },
@@ -77,8 +70,8 @@ function App() {
     <Container>
       <Header>
         <Nav
-          onOpen={handleOpen}
-          onClose={handleClose}
+          onOpen={open}
+          onClose={() => close(0)}
           width={width}
           x={x}
           blur={blur}
