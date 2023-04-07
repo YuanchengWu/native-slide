@@ -55,10 +55,11 @@ const PrimaryButton = styled.button`
   line-height: 2rem;
   width: 100%;
   padding: 0.5rem 0;
-  transition: filter 200ms ease;
+  transition: all 200ms ease;
 
   :active {
-    filter: brightness(85%);
+    opacity: 80%;
+    transform: scale(95%);
   }
 `
 
