@@ -114,9 +114,12 @@ function App() {
         <EE
           style={{
             transform: x.to((px) => `scale(${range(0, -width, 1, 2, px)})`),
+            color: x.to(
+              (px) => `hsl(${range(0, -width, 0, 360, px)}, 100%, 50%)`
+            ),
           }}
         >
-          Hire me! 🤝
+          Hire me! 🥚🐣
         </EE>
       </Page>
     </Container>
